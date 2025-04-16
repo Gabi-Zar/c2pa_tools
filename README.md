@@ -5,55 +5,58 @@ This repository contains a Python script designed to assist with read and removi
 > [!CAUTION]
 > Use this script responsibly. Ensure you have the right to modify the files you process.
 
-## Features
+## 🌟 Highlights
 
-- **c2pas_tools**: Removes and read C2PA metadata from png images.
+- Works with any .png file
+- check if a file contains a c2pa signature
+- Delete the chunk(s) containing the signature
+- Extract the c2pa signature in a BIN file
 
-## Requirements
+## 🔗 Requirements
 
-- Python 3 or higher
+- [Python 3](https://www.python.org/) or higher
 
-## Usage
+## 🚀 Usage
 
-1. Clone this repository:
+1. Clone this repository or download it manually:
     ```bash
-    git clone https://github.com/yourusername/c2pa-remover.git
-    cd c2pa-remover
+    git clone https://github.com/Gabi-Zar/c2pa_tools.git
+    cd c2pa_tools
     ```
 
 2. Run the script:
-    - read
+    - Read c2pa signature
         ```bash
         python c2pa_tools.py input.png 
         ```
-    - remove
+    - Remove c2pa signature
         ```bash
         python c2pa_tools.py input.png --remove --output output.png
         ```
-    - remove and replace
+    - Remove c2pa signature and replace original file
         ```bash
         python c2pa_tools.py input.png --remove --replace
         ```
-    - extract
+    - Extract c2pa signature in a BIN file
         ```bash
         python c2pa_tools.py input.png --extract
         ```
 
-## How does it work
+## ⚙️ How does it work
 
 1. the script searches for all occurrences of "c2pa" in the image's hexadecimal code
 2. the script deletes all chunks containing "c2pa" unless they are critical chunks that could corrupt the image
 
-## FAQ
+## ❓ FAQ
 
 - Why not use [C2PA command line tool](https://github.com/contentauth/c2pa-rs/tree/main/cli)
     - The script does not use this library, which means that non-standard c2pa chunks can be deleted as long as they contain the word c2pa.
     <br>
-- Comment supprimer la signature c2pa d'autre format de fichier que .png
+- How to remove the c2pa signature from a file format other than .png
     - wait for me to update
     - use [C2PA command line tool](https://github.com/contentauth/c2pa-rs/tree/main/cli) for standard c2pa signatures
     - Manually edit the file with a hexadecimal editor
 
-## License
+## 📜 License
 
 This project is licensed under the [MIT License](LICENSE).
