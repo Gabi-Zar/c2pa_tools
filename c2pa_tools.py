@@ -24,7 +24,7 @@ def find_c2pa_chunks(input_file: Path):
     with open(input_file, 'rb') as f:
         sig = f.read(8)
         if sig != b'\x89PNG\r\n\x1a\n':
-            print("❌ Ce fichier n'est pas un PNG valide.")
+            print("❌ This file is not a valid PNG.")
             return []
 
         found = []
@@ -44,7 +44,7 @@ def remove_c2pa_chunks(input_file: Path, output_file: Path):
     with open(input_file, 'rb') as f:
         sig = f.read(8)
         if sig != b'\x89PNG\r\n\x1a\n':
-            print("❌ Ce fichier n'est pas un PNG valide.")
+            print("❌ This file is not a valid PNG.")
             return
         chunks = []
         while True:
@@ -66,9 +66,9 @@ def remove_c2pa_chunks(input_file: Path, output_file: Path):
 
     output_file_size = output_file.stat().st_size
 
-    print(f"✅ Fichier nettoyé écrit dans : {output_file}")
-    print(f"🧹 {removed} chunk(s) contenant 'c2pa' ont été supprimés.")
-    print(f"↘️  La taille de l'image est passé de {input_file_size / 1000} ko à {output_file_size / 1000} ko.")
+    print(f"✅ Cleaned file written in : {output_file}")
+    print(f"🧹 {removed} chunk(s) containing 'c2pa' have been deleted.")
+    print(f"↘️  Image size reduced by {input_file_size / 1000} ko to {output_file_size / 1000} ko.")
 
 
 if __name__ == "__main__":
@@ -88,11 +88,11 @@ if __name__ == "__main__":
             for offset, chunk_type, size in found:
                 print(f" - Offset {offset} | Type: {chunk_type.decode(errors='ignore')} | Taille: {size} octets")
         else:
-            print("❌ Aucun chunk C2PA détecté.")
+            print("❌ No C2PA chunk detected.")
 
     elif args.remove:
         if not args.output and not args.replace:
-            print("❌ L’option --output ou --replace est requise avec --remove.")
+            print("❌ The --output or --replace option is required with --remove.")
         elif args.output:
             remove_c2pa_chunks(args.input, args.output)
         elif args.replace:
@@ -109,9 +109,9 @@ if __name__ == "__main__":
                         extract_file.write(f"Chunk Type: {chunk_type.decode(errors='ignore')}\n".encode())
                         extract_file.write(data)
                         extract_file.write(b"\n\n")
-            print(f"✅ Contenu C2PA extrait dans : {args.extract}")
+            print(f"✅ C2PA content extracted in : {args.extract}")
         else:
-            print("❌ Aucun chunk C2PA détecté.")
+            print("❌ No C2PA chunk detected.")
 
     else:
-        print("❌ Spécifie au moins --read ou --remove ou --extract.")
+        print("❌ Specifies at least --read or --remove or --extract.")
