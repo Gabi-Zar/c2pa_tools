@@ -1,4 +1,15 @@
-# C2PA Tools
+<h1 align="center">C2PA Tools in python</h1>
+<p align="center">
+    <img alt="Version" src="https://img.shields.io/badge/Version-0.1.0-blue?style=for-the-badge&color=blue">
+    <img alt="Stars" src="https://img.shields.io/github/stars/Gabi-Zar/c2pa_tools?style=for-the-badge&color=magenta">
+    <img alt="Forks" src="https://img.shields.io/github/forks/Gabi-Zar/c2pa_tools?color=cyan&style=for-the-badge&color=purple">
+    <img alt="License" src="https://img.shields.io/github/license/Gabi-Zar/c2pa_tools?style=for-the-badge&color=blue">
+    <br>
+    <a href="https://github.com/Gabi-Zar"><img title="Developer" src="https://img.shields.io/badge/Developer-GabiZar-red?style=flat-square"></a>
+    <img alt="Maintained" src="https://img.shields.io/badge/Maintained-Yes-blue?style=flat-square">
+    <img alt="Written In" src="https://img.shields.io/badge/Written%20In-Python-yellow?style=flat-square">
+</p>
+
 
 This repository contains a Python script designed to assist with read and removing C2PA data from png images (more extension coming soon). C2PA (Coalition for Content Provenance and Authenticity) metadata is used to provide information about the origin and authenticity of digital content.
 
