@@ -68,17 +68,22 @@ def remove_c2pa_chunks(input_file: Path, output_file: Path):
 
     print(f"✅ Cleaned file written in : {output_file}")
     print(f"🧹 {removed} chunk(s) containing 'c2pa' have been deleted.")
-    print(f"↘️  Image size reduced by {input_file_size / 1000} ko to {output_file_size / 1000} ko.")
+    print(f"↘️  Image size reduced by {input_file_size / 1024} ko to {output_file_size / 1024} ko.")
+
+
+    if removed > 0:
+        output_info = [True, input_file_size, output_file_size]
+        return output_info
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Lire ou supprimer les chunks C2PA d’un fichier PNG")
-    parser.add_argument("input", type=Path, help="Fichier PNG source")
-    parser.add_argument("--output", type=Path, help="Fichier PNG nettoyé (requis avec --remove)")
-    parser.add_argument("--read", action="store_true", help="Afficher les chunks contenant 'c2pa'")
-    parser.add_argument("--remove", action="store_true", help="Supprimer les chunks contenant 'c2pa'")
-    parser.add_argument("--replace", action="store_true", help="remplacer le fichier d'entrée par le fichier de sortie")
-    parser.add_argument("--extract", type=Path, help="extrait le contenu C2PA dans un fichier séparé")
+    parser = argparse.ArgumentParser(description="Read or delete C2PA chunks from a PNG file")
+    parser.add_argument("input", type=Path, help="Source PNG file or folder")
+    parser.add_argument("--output", type=Path, help="output file or folder (required with --remove if not using --replace)")
+    parser.add_argument("--read", action="store_true", help="Show chunks containing 'c2pa'.")
+    parser.add_argument("--remove", action="store_true", help="Delete chunks containing 'c2pa'.")
+    parser.add_argument("--replace", action="store_true", help="replace input file with output file")
+    parser.add_argument("--extract", type=Path, help="extracts C2PA content into a separate file")
     args = parser.parse_args()
 
     if args.read:
@@ -94,9 +99,35 @@ if __name__ == "__main__":
         if not args.output and not args.replace:
             print("❌ The --output or --replace option is required with --remove.")
         elif args.output:
-            remove_c2pa_chunks(args.input, args.output)
+            if args.input.suffix.lower() == ".png":
+                remove_c2pa_chunks(args.input, args.output)
+            elif args.input.is_dir():
+                if not args.output.exists():
+                    print(f"📂 The directory '{args.output}' does not exist. Creating it...")
+                    args.output.mkdir(parents=True, exist_ok=True)
+                if len(list(args.input.glob("*.png"))) < 1:
+                    print("❌ No PNG file found in the input directory.")
+                else:
+                    print(f"✅ {len(list(args.input.glob('*.png')))} PNG file(s) found in the input directory.")
+                    cleaned_files = 0
+                    input_files_size = 0
+                    output_files_size = 0
+                    for file in args.input.glob("*.png"):
+                        output_file = args.output / file.name
+                        remove = remove_c2pa_chunks(file, output_file)
+                        if remove[0] == True:
+                            cleaned_files += 1
+                            input_files_size += remove[1]
+                            output_files_size += remove[2]
+                    print(f"✅ {cleaned_files} PNG file(s) cleaned in the output directory.")
+                    print(f"↘️  Folder size reduced by {input_files_size / 1024} ko to {output_files_size / 1024} ko.")
+            else:
+                print("❌ The input file must be a PNG file or a directory containing PNG files.")
         elif args.replace:
-            remove_c2pa_chunks(args.input, args.input)
+            if args.input.suffix.lower() != ".png":
+                print("❌ The input file must be a PNG file.")
+            else:
+                remove_c2pa_chunks(args.input, args.input)
 
     elif args.extract:
         found = find_c2pa_chunks(args.input)
