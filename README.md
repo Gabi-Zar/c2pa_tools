@@ -1,6 +1,6 @@
 <h1 align="center">C2PA Tools in python</h1>
 <p align="center">
-    <img alt="Version" src="https://img.shields.io/badge/Version-0.1.0-blue?style=for-the-badge&color=blue">
+    <img alt="Version" src="https://img.shields.io/badge/Version-0.2.1-blue?style=for-the-badge&color=blue">
     <img alt="Stars" src="https://img.shields.io/github/stars/Gabi-Zar/c2pa_tools?style=for-the-badge&color=magenta">
     <img alt="Forks" src="https://img.shields.io/github/forks/Gabi-Zar/c2pa_tools?color=cyan&style=for-the-badge&color=purple">
     <img alt="License" src="https://img.shields.io/github/license/Gabi-Zar/c2pa_tools?style=for-the-badge&color=blue">
@@ -18,14 +18,15 @@ This repository contains a Python script designed to assist with read and removi
 
 ## 🌟 Highlights
 
-- Works with any .png file
-- check if a file contains a c2pa signature
-- Delete the chunk(s) containing the signature
-- Extract the c2pa signature in a BIN file
+- Works with any .png file.
+- check if a file contains a c2pa signature.
+- Delete the chunk(s) containing the signature.
+- Works with an entire folder for mass deletion.
+- Extract the c2pa signature in a BIN file.
 
 ## 🔗 Requirements
 
-- [Python 3](https://www.python.org/) or higher
+- [Python 3](https://www.python.org/) or higher.
 
 ## 🚀 Usage
 
@@ -48,6 +49,10 @@ This repository contains a Python script designed to assist with read and removi
         ```bash
         python c2pa_tools.py input.png --remove --replace
         ```
+   - Remove c2pa signature from folder
+        ```bash
+        python c2pa_tools.py input/path --remove --output output/path
+        ```
     - Extract c2pa signature in a BIN file
         ```bash
         python c2pa_tools.py input.png --extract
@@ -55,18 +60,18 @@ This repository contains a Python script designed to assist with read and removi
 
 ## ⚙️ How does it work
 
-1. the script searches for all occurrences of "c2pa" in the image's hexadecimal code
-2. the script deletes all chunks containing "c2pa" unless they are critical chunks that could corrupt the image
+1. the script searches for all occurrences of "c2pa" in the image's hexadecimal code.
+2. the script deletes all chunks containing "c2pa" unless they are critical chunks that could corrupt the image.
 
 ## ❓ FAQ
 
-- Why not use [C2PA command line tool](https://github.com/contentauth/c2pa-rs/tree/main/cli)
+- Why not use [C2PA command line tool](https://github.com/contentauth/c2pa-rs/tree/main/cli) ?
     - The script does not use this library, which means that non-standard c2pa chunks can be deleted as long as they contain the word c2pa.
     <br>
-- How to remove the c2pa signature from a file format other than .png
-    - wait for me to update
-    - use [C2PA command line tool](https://github.com/contentauth/c2pa-rs/tree/main/cli) for standard c2pa signatures
-    - Manually edit the file with a hexadecimal editor
+- How to remove the c2pa signature from a file format other than .png ?
+    - wait for me to update.
+    - use [C2PA command line tool](https://github.com/contentauth/c2pa-rs/tree/main/cli) for standard c2pa signatures.
+    - Manually edit the file with a hexadecimal editor like [ImHex](https://imhex.werwolv.net/).
 
 ## 📜 License
 
