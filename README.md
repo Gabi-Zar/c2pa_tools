@@ -75,4 +75,4 @@ This repository contains a Python script designed to assist with read and removi
 
 ## 📜 License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](LICENSE). 
