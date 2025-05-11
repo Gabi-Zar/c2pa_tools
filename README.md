@@ -6,7 +6,7 @@
     <img alt="License" src="https://img.shields.io/github/license/Gabi-Zar/c2pa_tools?style=for-the-badge&color=blue">
     <br>
     <a href="https://github.com/Gabi-Zar"><img title="Developer" src="https://img.shields.io/badge/Developer-GabiZar-red?style=flat-square"></a>
-    <img alt="Maintained" src="https://img.shields.io/badge/Maintained-Yes-blue?style=flat-square">
+    <img alt="Maintained" src="https://img.shields.io/badge/Maintained-No-blue?style=flat-square">
     <img alt="Written In" src="https://img.shields.io/badge/Written%20In-Python-yellow?style=flat-square">
 </p>
 
